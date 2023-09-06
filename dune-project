@@ -129,6 +129,18 @@ generator")
   (odoc :with-doc)))
 
 (package
+ (name atdgen-emit)
+ (synopsis "Code generation library by atdgen")
+ (description "\
+This package should be used only in conjunction with the atdgen code
+generator")
+ (depends
+  (ocaml (>= 4.08))
+  (yojson (>= 2.0.2))
+  (biniou (>= 1.0.6))
+  (odoc :with-doc)))
+
+(package
  (name atdj)
  (synopsis "Java code generation for ATD")
  (description "\

@@ -71,7 +71,7 @@ let check_inheritance tbl (t0 : type_expr) =
   check (get_kind t0) (add_name [] t0) t0
 
 
-let check_type_expr tbl tvars (t : type_expr) =
+let check_type_expr ?(module_only = true) tbl tvars (t : type_expr) =
   let rec check : type_expr -> unit = function
       Sum (_, vl, _) as x ->
         List.iter (check_variant (Hashtbl.create 10)) vl;
@@ -94,6 +94,7 @@ let check_type_expr tbl tvars (t : type_expr) =
     | Name (_, (loc, k, tal), _) ->
         assert (k <> "list" && k <> "option"
                 && k <> "nullable" && k <> "shared" && k <> "wrap");
+        if not module_only then
         let (arity, _opt_def) =
           try Hashtbl.find tbl k
           with Not_found -> error_at loc ("Undefined type " ^ k)
@@ -105,7 +106,6 @@ let check_type_expr tbl tvars (t : type_expr) =
                           k arity n (if n > 1 then "s are given"
                                      else " is given")
                        );
-
         List.iter check tal
 
     | Tvar (loc, s) ->

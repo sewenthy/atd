@@ -120,7 +120,7 @@ let make_json_string s = Yojson.Safe.to_string (`String s)
 *)
 let rec get_writer_name
     ?(paren = false)
-    ?(name_f = fun s -> "write_" ^ s)
+    ?(name_f = fun s -> "json_write_" ^ s)
     p (x : Oj_mapping.t) : string =
   match x with
     Unit (_, Ocaml.Repr.Unit, Unit) ->
@@ -188,14 +188,14 @@ let get_left_writer_name p name param =
   get_writer_name p (Name (dummy_loc, name, args, None, None))
 
 let get_left_to_string_name p name param =
-  let name_f s = "string_of_" ^ s in
+  let name_f s = "json_string_of_" ^ s in
   let args = List.map (fun s -> Tvar (dummy_loc, s)) param in
   get_writer_name ~name_f p (Name (dummy_loc, name, args, None, None))
 
 
 let rec get_reader_name
     ?(paren = false)
-    ?(name_f = fun s -> "read_" ^ s)
+    ?(name_f = fun s -> "json_read_" ^ s)
     p (x : Oj_mapping.t) : string =
 
   match x with
@@ -243,7 +243,7 @@ let get_left_reader_name p name param =
   get_reader_name p (Name (dummy_loc, name, args, None, None))
 
 let get_left_of_string_name p name param =
-  let name_f s = s ^ "_of_string" in
+  let name_f s = s ^ "_of_json_string" in
   let args = List.map (fun s -> Tvar (dummy_loc, s)) param in
   get_reader_name ~name_f p (Name (dummy_loc, name, args, None, None))
 
@@ -265,6 +265,8 @@ let unwrap_f_value { Ox_emit.mapping; unwrapped; _} (p : param) =
   else
     mapping.f_value
 
+
+(* USE THIS FUNCTION WITH OCAML AST *)
 let rec make_writer ?type_constraint p (x : Oj_mapping.t) : Indent.t list =
   match x with
     Unit _
