@@ -358,12 +358,12 @@ let get_ocaml_module target an =
         ~sections:path
         ~field:"from" an
       |> Option.map (fun s ->
-        let type_module = s ^ "_t" in
+        let type_module = s in
         let main_module =
           match target with
           | Default -> type_module
           | Biniou -> s ^ "_b"
-          | Json -> s ^ "_j"
+          | Json -> s
           | Bucklescript -> s ^ "_bs"
           | Validate -> s ^ "_v"
         in
