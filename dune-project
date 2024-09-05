@@ -96,8 +96,8 @@ formats. "))
  (depends
   (ocaml (>= 4.08))
   (alcotest :with-test)
-  (atd (>= 2.11.0))
-  (atdgen-runtime (>= 2.1.0))
+  atd
+  atdgen-runtime
   (atdgen-codec-runtime :with-test)
   (biniou (>= 1.0.6))
   (yojson (>= 2.0.1))
@@ -160,7 +160,7 @@ specification.
 automatically handled")
  (depends
   (ocaml (>= 4.08))
-  (atd (>= 2.7.0))
+  atd
   re
   (odoc :with-doc)))
 
