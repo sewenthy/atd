@@ -1,2 +1,0 @@
-File "test_ocaml_keyword_error1.atd", line 1, characters 0-15:
-"then" cannot be used as type name (reserved OCaml keyword)

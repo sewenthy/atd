@@ -1,5 +1,0 @@
-type ambiguous = {ambiguous:string;not_ambiguous1:int}
-
-type ambiguous' = {ambiguous:string;not_ambiguous2:int}
-   <json adapter.ocaml="Json_adapters.Identity">
-

@@ -1,3 +1,0 @@
-type t <ocaml attr="deriving show,eq" attr="ocamlformat \"disable\""> = {
-  v: int;
-}
